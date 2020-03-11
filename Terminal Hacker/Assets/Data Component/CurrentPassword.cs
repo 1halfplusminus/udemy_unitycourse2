@@ -6,5 +6,5 @@ using Unity.Mathematics;
 [Serializable]
 public struct CurrentPassword : IComponentData
 {
-
+    public Entity password;
 }
