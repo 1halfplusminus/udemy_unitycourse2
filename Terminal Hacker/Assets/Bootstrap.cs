@@ -10,14 +10,14 @@ using System.Linq;
 
 public class Bootstrap : MonoBehaviour
 {
-    [System.Serializable]
-    public class Words
-    {
-        public List<string> list;
-    }
+    /*   [System.Serializable]
+      public class Words
+      {
+          public List<string> list;
+      } */
     [SerializeField] private GameObject mainMenuPrefab;
     [SerializeField] private GameObject gameUIPrefab;
-    [SerializeField] private List<Words> dictionary;
+    /* [SerializeField] private List<Words> dictionary; */
 
     private MainMenu mainMenu;
     private GameUI gameUI;
@@ -31,10 +31,10 @@ public class Bootstrap : MonoBehaviour
         stateQuery = entityManager.CreateEntityQuery(typeof(HackerGameState));
         CreateGameState();
         ShowMainMenu();
-        CreateDictionaryEntity();
-        LoadWords();
+        /*  CreateDictionaryEntity(); */
+        /*    LoadWords(); */
     }
-    void CreateDictionaryEntity()
+    /* void CreateDictionaryEntity()
     {
 
         for (int i = 0; i < dictionary.Count; i++)
@@ -45,29 +45,29 @@ public class Bootstrap : MonoBehaviour
             entityManager.AddBuffer<DirectoryPasswordElement>(entity);
             entityManager.SetName(entity, "Dictionnary " + i + 1);
         }
-    }
-    void LoadWords()
-    {
-        var nativeDictionnaries = entityManager.CreateEntityQuery(typeof(GameDictionnary), typeof(Level))
-        .ToEntityArray(Allocator.TempJob);
-        var dictionaries = nativeDictionnaries
-        .ToDictionary((l) => entityManager.GetComponentData<Level>(l).Value);
-        var flattenList = dictionary.SelectMany((x, level) => x.list.Select((word) => new GamePassword() { value = word, level = level + 1 })).ToList();
-        var archetype = entityManager.CreateArchetype(typeof(GamePassword));
-        var wordsArrays = new NativeArray<Entity>(flattenList.Count, Allocator.Temp);
-        entityManager.CreateEntity(archetype, wordsArrays);
-        for (int i = 0; i < wordsArrays.Length; i++)
-        {
-            entityManager.AddComponentData(wordsArrays[i], flattenList[i]);
-            Entity dictionary;
-            if (dictionaries.TryGetValue(flattenList[i].level, out dictionary))
-            {
-                var buffer = entityManager.GetBuffer<DirectoryPasswordElement>(dictionary).Add(new DirectoryPasswordElement() { Value = wordsArrays[i] });
-            }
-        }
-        wordsArrays.Dispose();
-        nativeDictionnaries.Dispose();
-    }
+    } */
+    /*  void LoadWords()
+     {
+         var nativeDictionnaries = entityManager.CreateEntityQuery(typeof(GameDictionnary), typeof(Level))
+         .ToEntityArray(Allocator.TempJob);
+         var dictionaries = nativeDictionnaries
+         .ToDictionary((l) => entityManager.GetComponentData<Level>(l).Value);
+         var flattenList = dictionary.SelectMany((x, level) => x.list.Select((word) => new GamePassword() { Value = word, level = level + 1 })).ToList();
+         var archetype = entityManager.CreateArchetype(typeof(GamePassword));
+         var wordsArrays = new NativeArray<Entity>(flattenList.Count, Allocator.Temp);
+         entityManager.CreateEntity(archetype, wordsArrays);
+         for (int i = 0; i < wordsArrays.Length; i++)
+         {
+             entityManager.AddComponentData(wordsArrays[i], flattenList[i]);
+             Entity dictionary;
+             if (dictionaries.TryGetValue(flattenList[i].level, out dictionary))
+             {
+                 var buffer = entityManager.GetBuffer<DirectoryPasswordElement>(dictionary).Add(new DirectoryPasswordElement() { Value = wordsArrays[i] });
+             }
+         }
+         wordsArrays.Dispose();
+         nativeDictionnaries.Dispose();
+     } */
     private void CreateGameState()
     {
         var archetype = entityManager.CreateArchetype(typeof(HackerGameDifficulty), typeof(HackerGameState));

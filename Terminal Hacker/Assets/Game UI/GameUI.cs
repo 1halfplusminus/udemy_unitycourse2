@@ -32,7 +32,7 @@ public class GameUI : MonoBehaviour
     string CurrentPassword()
     {
         var entity = currentPasswordQuery.GetSingleton<CurrentPassword>();
-        return World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<GamePassword>(entity.password).value.ToString();
+        return World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<GamePassword>(entity.password).Value.ToString();
     }
     void MarkCurrentPasswordAsCracked()
     {

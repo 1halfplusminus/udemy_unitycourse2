@@ -5,6 +5,6 @@ using Unity.Collections;
 [Serializable]
 public struct GamePassword : IComponentData
 {
-    public NativeString64 value;
-    public int level;
+    public NativeString64 Value;
+
 }
