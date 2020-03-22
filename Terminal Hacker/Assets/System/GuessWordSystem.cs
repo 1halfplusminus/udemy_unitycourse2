@@ -5,16 +5,20 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using static Unity.Mathematics.math;
+using System.Linq;
 
 public class GuessWordSystem : JobComponentSystem
 {
     [BurstCompile]
     struct FindWordJob : IJobForEachWithEntity_EBCC<DirectoryPasswordElement, GameDictionnary, Level>
     {
+        public NativeArray<Entity> result;
         public EntityCommandBuffer.Concurrent commandBuffer;
         public int level;
 
         public uint seed;
+
+        [ReadOnly] public ComponentDataFromEntity<GamePassword> componentDataFromEntity;
 
         public void Execute(Entity entity,
         int index,
@@ -27,10 +31,17 @@ public class GuessWordSystem : JobComponentSystem
                 var random = new Unity.Mathematics.Random((uint)seed);
                 var randomIndex = random.NextInt(0, directoryPassword.Length - 1);
                 var currentPassword = directoryPassword[randomIndex];
-                commandBuffer.AddComponent<CurrentPassword>(index, currentPassword.Value, new CurrentPassword() { password = currentPassword.Value });
+                var password = componentDataFromEntity[currentPassword.Value];
+                commandBuffer.AddComponent(index, currentPassword.Value, new CurrentPassword()
+                {
+                    password = currentPassword.Value,
+                });
+                result[0] = currentPassword.Value;
             }
             return;
         }
+
+
     }
 
     [BurstCompile]
@@ -57,6 +68,19 @@ public class GuessWordSystem : JobComponentSystem
             }
             return;
         }
+        static string Scrabble(uint seed, string input)
+        {
+            var chars = input.ToArray();
+            var r = new Unity.Mathematics.Random(seed); ;
+            for (int i = 0; i < chars.Length; i++)
+            {
+                int randomIndex = r.NextInt(0, input.Length);
+                char temp = input[randomIndex];
+                chars[randomIndex] = chars[i];
+                chars[i] = temp;
+            }
+            return new string(chars);
+        }
     }
     EndSimulationEntityCommandBufferSystem entityCommandBufferSystem;
     System.Random seed;
@@ -80,34 +104,38 @@ public class GuessWordSystem : JobComponentSystem
             var currentLevelEntity = GetSingletonEntity<SelectRandomPassword>();
             var currentLevel = EntityManager.GetComponentData<SelectRandomPassword>(currentLevelEntity);
             var countNotCrackedPassword = GetEntityQuery(typeof(GamePassword), ComponentType.Exclude<CrackedPassword>());
-            /*    var gamePasswords = new NativeList<Entity>(countNotCrackedPassword.CalculateEntityCount(), Allocator.TempJob); */
+            NativeArray<Entity> result = new NativeArray<Entity>(1, Allocator.TempJob);
             var job = new FindWordJob()
             {
                 commandBuffer = entityCommandBufferSystem.CreateCommandBuffer().ToConcurrent(),
                 level = currentLevel.level,
-                seed = (uint)seed.Next()
+                seed = (uint)seed.Next(),
+                componentDataFromEntity = GetComponentDataFromEntity<GamePassword>(true),
+                result = result
             };
             var findWordHandle = job.Schedule(this, inputDependencies);
             entityCommandBufferSystem.AddJobHandleForProducer(inputDependencies);
             findWordHandle.Complete();
             EntityManager.RemoveComponent<SelectRandomPassword>(currentLevelEntity);
-            /*   if (gamePasswords.Length > 0)
-              {
-                  MarkOneAsCurrent(currentLevelEntity, gamePasswords);
-
-              }
-              gamePasswords.Dispose(); */
+            for (int i = 0; i < result.Length; i++)
+            {
+                GenerateHint(result[i]);
+            }
+            result.Dispose();
             return findWordHandle;
         }
         return default;
     }
-    void MarkOneAsCurrent(Entity currentLevelEntity, NativeList<Entity> gamePasswords)
+    void GenerateHint(Entity entity)
     {
-        var rnd = GetRandom();
-        var currentPasswordEntity = gamePasswords[rnd.NextInt(0, gamePasswords.Length)];
-        var password = EntityManager.GetComponentData<GamePassword>(currentPasswordEntity);
-        EntityManager.AddComponentData(currentLevelEntity, new CurrentPassword() { password = currentPasswordEntity });
-        EntityManager.RemoveComponent<SelectRandomPassword>(currentLevelEntity);
+        var seedNext = (uint)seed.Next();
+        var commandBuffer = entityCommandBufferSystem.CreateCommandBuffer();
+        var password = EntityManager.GetComponentData<GamePassword>(entity);
+        EntityManager.AddComponentData(entity, new NewPasswordHintEvent() { Value = Scrabble(seedNext, password.Value.ToString()) });
+    }
+    static string Scrabble(uint seed, string input)
+    {
+        return new string(input.ToCharArray().OrderBy(x => System.Guid.NewGuid()).ToArray());
     }
     Random GetRandom()
     {

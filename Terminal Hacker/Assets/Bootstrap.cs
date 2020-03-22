@@ -31,43 +31,7 @@ public class Bootstrap : MonoBehaviour
         stateQuery = entityManager.CreateEntityQuery(typeof(HackerGameState));
         CreateGameState();
         ShowMainMenu();
-        /*  CreateDictionaryEntity(); */
-        /*    LoadWords(); */
     }
-    /* void CreateDictionaryEntity()
-    {
-
-        for (int i = 0; i < dictionary.Count; i++)
-        {
-            var entity = entityManager.CreateEntity(typeof(GameDictionnary), typeof(Level));
-            entityManager.AddComponentData(entity, new GameDictionnary());
-            entityManager.AddComponentData(entity, new Level() { Value = i + 1 });
-            entityManager.AddBuffer<DirectoryPasswordElement>(entity);
-            entityManager.SetName(entity, "Dictionnary " + i + 1);
-        }
-    } */
-    /*  void LoadWords()
-     {
-         var nativeDictionnaries = entityManager.CreateEntityQuery(typeof(GameDictionnary), typeof(Level))
-         .ToEntityArray(Allocator.TempJob);
-         var dictionaries = nativeDictionnaries
-         .ToDictionary((l) => entityManager.GetComponentData<Level>(l).Value);
-         var flattenList = dictionary.SelectMany((x, level) => x.list.Select((word) => new GamePassword() { Value = word, level = level + 1 })).ToList();
-         var archetype = entityManager.CreateArchetype(typeof(GamePassword));
-         var wordsArrays = new NativeArray<Entity>(flattenList.Count, Allocator.Temp);
-         entityManager.CreateEntity(archetype, wordsArrays);
-         for (int i = 0; i < wordsArrays.Length; i++)
-         {
-             entityManager.AddComponentData(wordsArrays[i], flattenList[i]);
-             Entity dictionary;
-             if (dictionaries.TryGetValue(flattenList[i].level, out dictionary))
-             {
-                 var buffer = entityManager.GetBuffer<DirectoryPasswordElement>(dictionary).Add(new DirectoryPasswordElement() { Value = wordsArrays[i] });
-             }
-         }
-         wordsArrays.Dispose();
-         nativeDictionnaries.Dispose();
-     } */
     private void CreateGameState()
     {
         var archetype = entityManager.CreateArchetype(typeof(HackerGameDifficulty), typeof(HackerGameState));
