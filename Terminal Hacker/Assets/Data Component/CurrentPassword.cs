@@ -7,5 +7,6 @@ using Unity.Mathematics;
 public struct CurrentPassword : IComponentData
 {
     public Entity password;
-
+    public int index;
+    public Entity dictionnary;
 }

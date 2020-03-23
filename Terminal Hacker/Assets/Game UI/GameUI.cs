@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.Collections;
@@ -10,7 +9,10 @@ using UnityEngine.Events;
 public class GameUI : MonoBehaviour
 {
     const string infoText = @"Entrer le mot de passe, indice: {{value}}.
-Vous pouvez taper le mot menu a tout moment";
+
+Vous pouvez taper le mot menu a tout moment
+
+";
 
     [SerializeField] private TMP_InputField input;
     [SerializeField] private TMP_Text log;
@@ -33,61 +35,28 @@ Vous pouvez taper le mot menu a tout moment";
         input.ActivateInputField();
         input.onDeselect.AddListener(OnDeselect);
         input.onSubmit.AddListener(OnSubmit);
-
     }
     void Update()
     {
-        if (currentPasswordQuery.CalculateEntityCount() > 0)
-        {
-            var currentPassword = currentPasswordQuery.GetSingletonEntity();
-            if (World.DefaultGameObjectInjectionWorld.EntityManager.HasComponent<NewPasswordHintEvent>(currentPassword))
-            {
-                var hint = World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<NewPasswordHintEvent>(currentPassword);
-                info.text = infoText.Replace("{{value}}", hint.Value.ToString());
-                World.DefaultGameObjectInjectionWorld.EntityManager.RemoveComponent<NewPasswordHintEvent>(currentPassword);
-            }
-        }
+        OnPasswordHint();
+        OnBadGuess();
+        OnGoodGuess();
     }
-    void OnDeselect(string value)
+    void OnPasswordHint()
     {
-        input.ActivateInputField();
-    }
-    string CurrentPassword()
-    {
-        if (currentPasswordQuery.CalculateEntityCount() > 0)
+        var query = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(typeof(NewPasswordHintEvent));
+        var hints = query.ToComponentDataArray<NewPasswordHintEvent>(Allocator.Persistent);
+        for (int i = 0; i < hints.Length; i++)
         {
-            var entity = currentPasswordQuery.GetSingleton<CurrentPassword>();
-            return World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<GamePassword>(entity.password).Value.ToString();
+            var hint = hints[i];
+            info.text = infoText.Replace("{{value}}", hint.Value.ToString());
         }
-        return "";
+        hints.Dispose();
     }
-    void MarkCurrentPasswordAsCracked()
+    void OnBadGuess()
     {
-        var entity = currentPasswordQuery.GetSingleton<CurrentPassword>();
-        World.DefaultGameObjectInjectionWorld.EntityManager.AddComponentData(entity.password, new CrackedPassword() { });
-        World.DefaultGameObjectInjectionWorld.EntityManager.RemoveComponent<CurrentPassword>(currentPasswordQuery.GetSingletonEntity());
-    }
-
-    void OnSubmit(string value)
-    {
-        var currentPassword = CurrentPassword();
-        var lastLine = value.Split('\n').Last();
-        EmptyInput();
-        WriteInput(lastLine);
-        Debug.Log(currentPassword);
-        if (value == "menu")
-        {
-            goBack.Invoke();
-        }
-        if (lastLine == currentPassword)
-        {
-            Debug.Log("Vous avez gagné");
-            MarkCurrentPasswordAsCracked();
-            WriteLine();
-            WriteInput("Mot de correct.");
-            StartCoroutine(GoBack());
-        }
-        else
+        var query = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(typeof(BadGuess));
+        if (query.CalculateEntityCount() > 0)
         {
             WriteLine();
             WriteInput("Mot de passe incorrect.");
@@ -95,9 +64,42 @@ Vous pouvez taper le mot menu a tout moment";
             input.ActivateInputField();
         }
     }
+    void OnGoodGuess()
+    {
+        var query = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(typeof(GoodGuess));
+        if (query.CalculateEntityCount() > 0)
+        {
+            Debug.Log("Vous avez gagné");
+            WriteLine();
+            WriteInput("Mot de correct.");
+            StartCoroutine(GoBack());
+        }
+    }
+    void OnDeselect(string value)
+    {
+        input.ActivateInputField();
+    }
+    void OnSubmit(string value)
+    {
+        var lastLine = value.Split('\n').Last();
+        EmptyInput();
+        WriteInput(lastLine);
+        if (value == "menu")
+        {
+            goBack.Invoke();
+        }
+        GuessPassword(lastLine);
+    }
+    void GuessPassword(string password)
+    {
+        var em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        var entity = em.CreateEntity(typeof(PasswordGuess));
+        em.AddComponentData(entity, new PasswordGuess() { Value = password });
+    }
     IEnumerator GoBack()
     {
         yield return new WaitForSeconds(2);
+
         goBack.Invoke();
     }
     void EmptyInput()

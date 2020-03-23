@@ -5,19 +5,10 @@ using Unity.Entities;
 using UnityEngine;
 using System.Linq;
 
-
-
-
 public class Bootstrap : MonoBehaviour
 {
-    /*   [System.Serializable]
-      public class Words
-      {
-          public List<string> list;
-      } */
     [SerializeField] private GameObject mainMenuPrefab;
     [SerializeField] private GameObject gameUIPrefab;
-    /* [SerializeField] private List<Words> dictionary; */
 
     private MainMenu mainMenu;
     private GameUI gameUI;
