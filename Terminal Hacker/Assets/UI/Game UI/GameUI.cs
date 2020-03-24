@@ -98,7 +98,7 @@ Vous pouvez taper le mot menu a tout moment
     }
     IEnumerator GoBack()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
 
         goBack.Invoke();
     }

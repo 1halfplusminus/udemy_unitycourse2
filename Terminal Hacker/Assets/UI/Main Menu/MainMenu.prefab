@@ -669,7 +669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8391018686435304065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -684,10 +684,10 @@ RectTransform:
   m_Father: {fileID: 8542208468189702356}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -613.9171}
+  m_SizeDelta: {x: 1396.8, y: 19.65411}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8391018686435304067
 CanvasRenderer:
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 3
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -790,10 +790,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.9656067, w: 0.84020996}
   m_textInfo:
     textComponent: {fileID: 8391018686435304066}
-    characterCount: 23
+    characterCount: 1
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -821,7 +821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8391018686697493190
 RectTransform:
   m_ObjectHideFlags: 0
@@ -836,10 +836,10 @@ RectTransform:
   m_Father: {fileID: 8542208468189702356}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -284.95477}
+  m_SizeDelta: {x: 1396.8, y: 19.65411}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8391018686697493240
 CanvasRenderer:
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 3
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -942,10 +942,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.9656067, w: 0.84020996}
   m_textInfo:
     textComponent: {fileID: 8391018686697493191}
-    characterCount: 28
+    characterCount: 1
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1100,6 +1100,7 @@ GameObject:
   - component: {fileID: 8391018687389611253}
   - component: {fileID: 8391018687389611255}
   - component: {fileID: 8391018687389611254}
+  - component: {fileID: 5030507553420143795}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1152,7 +1153,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Qu'aimeriez-vous pirater ?
+  m_text: 'Qu''aimeriez-vous pirater ?
+
+
+    Appuyer sur 1 pour CagooCoin
+
+
+    Appuyer
+    sur 2 pour PacifikCoin
+
+
+    Appuyer sur 3 pour eCash
+
+
+    Entrer votre selection:
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1a6a0ef7ff7606947b06531a837aa989, type: 2}
   m_sharedMaterial: {fileID: -8633186522770059856, guid: 1a6a0ef7ff7606947b06531a837aa989,
@@ -1183,8 +1199,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34
-  m_fontSizeBase: 34
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1196,7 +1212,7 @@ MonoBehaviour:
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 100
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1227,12 +1243,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 93.079956, w: 0}
   m_textInfo:
     textComponent: {fileID: 8391018687389611254}
-    characterCount: 26
+    characterCount: 140
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 2
+    spaceCount: 25
+    wordCount: 20
     linkCount: 0
-    lineCount: 1
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1241,6 +1257,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5030507553420143795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8391018687389611252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b651e82f05ae194d8cd3e0b632cb854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitForSeconds: 0.01
 --- !u!1 &8391018687582754720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8391018687582754721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1273,10 +1302,10 @@ RectTransform:
   m_Father: {fileID: 8542208468189702356}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -394.6089}
+  m_SizeDelta: {x: 1396.8, y: 19.65411}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8391018687582754723
 CanvasRenderer:
@@ -1355,7 +1384,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 3
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -1379,10 +1408,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.9656067, w: 0.84020996}
   m_textInfo:
     textComponent: {fileID: 8391018687582754722}
-    characterCount: 30
+    characterCount: 1
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1410,7 +1439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8391018687768896989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1425,10 +1454,10 @@ RectTransform:
   m_Father: {fileID: 8542208468189702356}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -504.263}
+  m_SizeDelta: {x: 1396.8, y: 19.65411}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8391018687768896991
 CanvasRenderer:
@@ -1507,7 +1536,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 3
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -1531,10 +1560,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.9656067, w: 0.84020996}
   m_textInfo:
     textComponent: {fileID: 8391018687768896990}
-    characterCount: 24
+    characterCount: 1
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1

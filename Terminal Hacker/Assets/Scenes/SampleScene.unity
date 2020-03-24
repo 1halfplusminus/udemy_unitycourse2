@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   words:
   - bitcoin
+  - banane
   level: 2
 --- !u!4 &788145256
 Transform:
@@ -450,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   words:
   - hyperledger
+  - pizza
   level: 1
 --- !u!4 &1217987576
 Transform:
