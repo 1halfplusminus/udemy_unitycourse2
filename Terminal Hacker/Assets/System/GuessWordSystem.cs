@@ -20,7 +20,7 @@ public class GuessWordSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDependencies)
     {
         SelectRandomPasswordWhenNeeded(inputDependencies);
-        CheckPasswordIfNeeded(inputDependencies);
+        inputDependencies = CheckPasswordIfNeeded(inputDependencies);
         DeleteFlashMessage(inputDependencies);
         return inputDependencies;
     }
@@ -86,16 +86,19 @@ public class GuessWordSystem : JobComponentSystem
     {
         var currentPasswords =
         GetEntityQuery(typeof(CurrentPassword), ComponentType.Exclude<CrackedPassword>()).ToComponentDataArrayAsync<CurrentPassword>(Allocator.TempJob, out inputDependencies);
+        var menuTexts =
+       GetEntityQuery(typeof(MenuText)).ToEntityArray(Allocator.TempJob);
         var job = new CheckPasswordJob()
         {
             directoryPasswords = GetBufferFromEntity<DirectoryPasswordElement>(false),
             commandBuffer = entityCommandBufferSystem.CreateCommandBuffer().ToConcurrent(),
             currentPasswords = currentPasswords,
-            gamePasswords = GetComponentDataFromEntity<GamePassword>(true)
+            gamePasswords = GetComponentDataFromEntity<GamePassword>(true),
+            menuTexts = menuTexts
         };
         var handle = job.Schedule(this, inputDependencies);
         entityCommandBufferSystem.AddJobHandleForProducer(handle);
-        return default;
+        return handle;
     }
     void GenerateHint(Entity passwordEntity)
     {
@@ -116,7 +119,6 @@ public class GuessWordSystem : JobComponentSystem
     }
     Random GetRandom()
     {
-        UnityEngine.Debug.Log((uint)UnityEngine.Random.Range(10000, 100000));
         return new Unity.Mathematics.Random((uint)UnityEngine.Random.Range(1000, 100000));
     }
 }
@@ -139,8 +141,6 @@ struct FindWordJobBuffer : IJobForEachWithEntity_EBCC<DirectoryPasswordElement, 
         if (dictionnaryLevel.Value == level && directoryPassword.Length > 0)
         {
             var randomIndex = random.NextInt(0, directoryPassword.Length);
-            UnityEngine.Debug.Log(directoryPassword.Length - 1);
-            UnityEngine.Debug.Log(randomIndex);
             var currentPassword = directoryPassword[randomIndex];
             var password = componentDataFromEntity[currentPassword.Value];
             commandBuffer.AddComponent(index, currentPassword.Value, new CurrentPassword()
@@ -161,8 +161,10 @@ struct CheckPasswordJob : IJobForEachWithEntity<PasswordGuess>
 {
     public EntityCommandBuffer.Concurrent commandBuffer;
     [DeallocateOnJobCompletion] [ReadOnly] public NativeArray<CurrentPassword> currentPasswords;
+    [DeallocateOnJobCompletion] public NativeArray<Entity> menuTexts;
     [ReadOnly] public ComponentDataFromEntity<GamePassword> gamePasswords;
     [NativeDisableParallelForRestriction] public BufferFromEntity<DirectoryPasswordElement> directoryPasswords;
+    public Entity menu;
 
     public void Execute(
         Entity entity,
@@ -182,6 +184,12 @@ struct CheckPasswordJob : IJobForEachWithEntity<PasswordGuess>
                 commandBuffer.AddComponent(index, result, new GoodGuess() { });
                 commandBuffer.AddComponent(index, currentPassword.password, new CrackedPassword() { });
                 commandBuffer.RemoveComponent<CurrentPassword>(index, currentPassword.password);
+                for (int i = 0; i < menuTexts.Length; i++)
+                {
+                    commandBuffer.AddComponent(index, menuTexts[i], new ShowMenu() { });
+                    UnityEngine.Debug.Log("Show menu");
+                    UnityEngine.Debug.Log(menuTexts[i].Index);
+                }
             }
             else
             {

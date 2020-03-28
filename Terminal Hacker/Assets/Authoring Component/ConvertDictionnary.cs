@@ -12,10 +12,10 @@ public class ConvertDictionnary : MonoBehaviour, IConvertGameObjectToEntity
     [SerializeField] private List<string> words;
     [SerializeField] private int level;
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
-    {
+    {/* 
         dstManager.RemoveComponent<LocalToWorld>(entity);
         dstManager.RemoveComponent<Rotation>(entity);
-        dstManager.RemoveComponent<Translation>(entity);
+        dstManager.RemoveComponent<Translation>(entity); */
         dstManager.AddComponentData(entity, new Level() { Value = level });
         dstManager.AddComponentData(entity, new GameDictionnary());
         dstManager.AddBuffer<DirectoryPasswordElement>(entity);

@@ -8,4 +8,5 @@ public struct HackerGameState : IComponentData
 {
     public enum Screen { MainMenu, Password, Win };
     public Screen screen;
+    public bool inputEnabled;
 }

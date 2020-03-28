@@ -121,6 +121,92 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10950446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 10950448}
+  - component: {fileID: 10950449}
+  - component: {fileID: 10950447}
+  - component: {fileID: 10950450}
+  - component: {fileID: 10950451}
+  m_Layer: 0
+  m_Name: FirstMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &10950447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10950446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0
+--- !u!4 &10950448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10950446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10950449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10950446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498c5c1f35711944b95bfdab96777400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "Qu'aimeriez-vous pirater ?  \n\nAppuyer sur 1 pour CagooCoin  \n\nAppuyer
+    sur 2 pour PacifikCoin  \n\nAppuyer sur 3 pour eCash  \n\nEntrer votre selection: "
+--- !u!114 &10950450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10950446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ccd61f49182994ba463ad48253902d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &10950451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10950446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e0abe65454cc64499b3b44e151b385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.05
 --- !u!1 &730892029
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,11 +247,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 730892029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0892a16ad6d36b847b109958d038b442, type: 3}
+  m_Script: {fileID: 11500000, guid: 057f8959cf9b48b45bbfb90aacf2d8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  words:
-  - 
+  words: []
   level: 3
 --- !u!4 &730892032
 Transform:
@@ -174,9 +259,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730892029}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -221,12 +306,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 788145253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0892a16ad6d36b847b109958d038b442, type: 3}
+  m_Script: {fileID: 11500000, guid: 057f8959cf9b48b45bbfb90aacf2d8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  words:
-  - bitcoin
-  - banane
+  words: []
   level: 2
 --- !u!4 &788145256
 Transform:
@@ -235,9 +318,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788145253}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -446,12 +529,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1217987573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0892a16ad6d36b847b109958d038b442, type: 3}
+  m_Script: {fileID: 11500000, guid: 057f8959cf9b48b45bbfb90aacf2d8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   words:
-  - hyperledger
-  - pizza
+  - 5000
   level: 1
 --- !u!4 &1217987576
 Transform:
@@ -460,9 +542,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217987573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
